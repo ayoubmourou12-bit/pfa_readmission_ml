@@ -1,0 +1,14 @@
+venv/
+__pycache__/
+*.pyc
+*.pyo
+.env
+mlflow.db
+mlruns/
+models/*.pkl
+data/raw/
+data/processed/
+reports/*.png
+.dvc/cache/
+*.egg-info/
+.pytest_cache/

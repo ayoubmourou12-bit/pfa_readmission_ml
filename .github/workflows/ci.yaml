@@ -1,0 +1,53 @@
+name: CI — Tests automatiques
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v4
+
+      - name: Configuration Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+          cache: pip
+
+      - name: Installation des dépendances
+        run: pip install -r requirements.txt
+
+      - name: Vérification des imports
+        run: |
+          python -c "from src.config import PARAMS; print('config OK')"
+          python -c "from src.data_loader import load_raw; print('data_loader OK')"
+          python -c "from src.utils.logger import get_logger; print('logger OK')"
+
+      - name: Exécution des tests pytest
+        run: pytest tests/ -v --tb=short
+
+      - name: Rapport de couverture
+        run: |
+          pip install pytest-cov
+          pytest tests/ --cov=src --cov-report=term-missing --cov-fail-under=60
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Installation flake8
+        run: pip install flake8
+      - name: Vérification style (flake8)
+        run: |
+          flake8 src/ api/ --max-line-length=100 \
+            --exclude=__pycache__ \
+            --ignore=E501,W503
