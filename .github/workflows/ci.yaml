@@ -45,7 +45,8 @@ jobs:
       - name: Rapport de couverture
         run: |
           pip install pytest-cov
-          pytest tests/ --cov=src --cov-report=term-missing --omit="src/train.py,src/evaluate.py"
+          pytest tests/ --cov=src --cov-report=term-missing --cov-fail-under=50
+
   lint:
     runs-on: ubuntu-latest
     steps:
