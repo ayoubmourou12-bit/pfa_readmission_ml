@@ -153,3 +153,41 @@
 [2026-06-02 15:50:11] INFO     api.app — Chargement des artefacts ML...
 [2026-06-02 15:50:13] INFO     src.predict — Artefacts chargés — 71 features
 [2026-06-02 15:50:13] INFO     api.app — ✅ Modèle chargé — API prête
+[2026-06-02 16:12:15] INFO     api.routes — GET /health
+[2026-06-02 16:12:17] INFO     api.routes — GET /model-info
+[2026-06-02 16:12:23] INFO     api.routes — GET /health
+[2026-06-02 16:12:25] INFO     api.routes — GET /model-info
+[2026-06-02 16:12:28] INFO     src.predict — Prédiction : Réadmission probable (<30j) | proba=0.571
+[2026-06-02 16:12:28] INFO     api.routes — POST /predict | pred=1 proba=0.571 risk=Élevé | 0.26s
+[2026-06-02 16:17:46] INFO     api.app — Chargement des artefacts ML...
+[2026-06-02 16:17:47] INFO     src.predict — Artefacts chargés — 71 features
+[2026-06-02 16:17:47] INFO     api.app — ✅ Modèle chargé — API prête
+[2026-06-02 16:17:47] INFO     api.routes — GET /health
+[2026-06-02 16:17:47] INFO     src.predict — Prédiction : Réadmission probable (<30j) | proba=0.537
+[2026-06-02 16:17:47] INFO     api.routes — POST /predict | pred=1 proba=0.537 risk=Élevé | 0.148s
+[2026-06-02 16:17:47] INFO     api.routes — GET /model-info
+[2026-06-02 16:17:47] INFO     src.predict — Prédiction : Réadmission probable (<30j) | proba=0.537
+[2026-06-02 16:17:47] INFO     api.routes — POST /predict | pred=1 proba=0.537 risk=Élevé | 0.158s
+[2026-06-02 16:17:47] INFO     src.predict — Prédiction : Réadmission probable (<30j) | proba=0.537
+[2026-06-02 16:17:47] INFO     api.routes — POST /predict | pred=1 proba=0.537 risk=Élevé | 0.152s
+[2026-06-02 16:17:47] INFO     api.app — Arrêt de l'API
+[2026-06-02 16:19:02] INFO     api.app — Chargement des artefacts ML...
+[2026-06-02 16:19:03] INFO     src.predict — Artefacts chargés — 71 features
+[2026-06-02 16:19:03] INFO     api.app — ✅ Modèle chargé — API prête
+[2026-06-02 16:19:03] INFO     api.routes — GET /health
+[2026-06-02 16:19:03] INFO     src.predict — Prédiction : Réadmission probable (<30j) | proba=0.537
+[2026-06-02 16:19:03] INFO     api.routes — POST /predict | pred=1 proba=0.537 risk=Élevé | 0.136s
+[2026-06-02 16:19:03] INFO     api.routes — GET /model-info
+[2026-06-02 16:19:03] INFO     src.predict — Prédiction : Réadmission probable (<30j) | proba=0.537
+[2026-06-02 16:19:03] INFO     api.routes — POST /predict | pred=1 proba=0.537 risk=Élevé | 0.139s
+[2026-06-02 16:19:03] INFO     src.predict — Prédiction : Réadmission probable (<30j) | proba=0.537
+[2026-06-02 16:19:03] INFO     api.routes — POST /predict | pred=1 proba=0.537 risk=Élevé | 0.156s
+[2026-06-02 16:19:03] INFO     api.app — Arrêt de l'API
+[2026-06-02 16:21:49] INFO     api.app — Arrêt de l'API
+[2026-06-02 16:21:54] INFO     api.app — Chargement des artefacts ML...
+[2026-06-02 16:21:55] INFO     src.predict — Artefacts chargés — 71 features
+[2026-06-02 16:21:55] INFO     api.app — ✅ Modèle chargé — API prête
+[2026-06-02 16:21:59] INFO     api.app — Chargement des artefacts ML...
+[2026-06-02 16:22:00] INFO     src.predict — Artefacts chargés — 71 features
+[2026-06-02 16:22:00] INFO     api.app — ✅ Modèle chargé — API prête
+[2026-06-02 16:22:27] INFO     api.app — Arrêt de l'API
