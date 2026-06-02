@@ -150,3 +150,6 @@
 [2026-06-02 15:05:39] INFO     api.routes — GET /model-info
 [2026-06-02 15:05:41] INFO     src.predict — Prédiction : Réadmission probable (<30j) | proba=0.755
 [2026-06-02 15:05:41] INFO     api.routes — POST /predict | pred=1 proba=0.755 risk=Élevé | 0.162s
+[2026-06-02 15:50:11] INFO     api.app — Chargement des artefacts ML...
+[2026-06-02 15:50:13] INFO     src.predict — Artefacts chargés — 71 features
+[2026-06-02 15:50:13] INFO     api.app — ✅ Modèle chargé — API prête

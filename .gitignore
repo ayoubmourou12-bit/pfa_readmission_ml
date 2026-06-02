@@ -1,14 +1,48 @@
+# =====================
+# Environment
+# =====================
 venv/
+.env/
+
+# =====================
+# Python cache
+# =====================
 __pycache__/
 *.pyc
 *.pyo
-.env
-mlflow.db
-mlruns/
-models/*.pkl
-data/raw/
-data/processed/
-reports/*.png
-.dvc/cache/
 *.egg-info/
 .pytest_cache/
+
+# =====================
+# MLflow
+# =====================
+mlruns/
+mlflow.db
+
+# =====================
+# Data (raw + processed)
+# =====================
+data/raw/
+data/processed/
+
+# =====================
+# Models
+# =====================
+models/*.pkl
+
+# =====================
+# Reports / outputs
+# =====================
+reports/*.png
+reports/*.log
+
+# =====================
+# DVC
+# =====================
+.dvc/cache/
+.dvc/tmp/
+
+# =====================
+# Misc
+# =====================
+backup_temp/
