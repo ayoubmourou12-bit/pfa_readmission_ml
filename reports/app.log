@@ -206,3 +206,11 @@
 [2026-06-02 16:24:31] INFO     src.predict — Prédiction : Réadmission probable (<30j) | proba=0.537
 [2026-06-02 16:24:31] INFO     api.routes — POST /predict | pred=1 proba=0.537 risk=Élevé | 0.144s
 [2026-06-02 16:24:31] INFO     api.app — Arrêt de l'API
+[2026-06-02 20:58:35] INFO     api.routes — GET /health
+[2026-06-02 20:58:37] INFO     api.routes — GET /model-info
+[2026-06-02 20:58:53] INFO     api.routes — GET /health
+[2026-06-02 20:58:55] INFO     api.routes — GET /model-info
+[2026-06-02 20:59:03] INFO     api.routes — GET /health
+[2026-06-02 20:59:05] INFO     api.routes — GET /model-info
+[2026-06-02 20:59:07] INFO     src.predict — Prédiction : Réadmission probable (<30j) | proba=0.624
+[2026-06-02 20:59:07] INFO     api.routes — POST /predict | pred=1 proba=0.624 risk=Élevé | 0.358s
