@@ -209,7 +209,9 @@ def feature_engineering(df: pd.DataFrame) -> pd.DataFrame:
         df["insulin_change"] = ((df["insulin"] == 1) &
                                 (df.get("change", 0) == 1)).astype(int)
 
-    df = df.dropna(subset=["readmitted"])
+    
+    if "readmitted" in df.columns:
+        df = df.dropna(subset=["readmitted"])
     print(f"[feature_engineering] Shape : {df.shape}")
     return df
 
@@ -219,4 +221,58 @@ def build_dataset(path: Path = RAW_DATA_PATH) -> pd.DataFrame:
     df = clean(df)
     df = encode(df)
     df = feature_engineering(df)
+    return df
+
+# Ajouter à la fin de src/data_loader.py
+
+def encode_inference(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Encodage pour l'inférence (un seul patient).
+    Identique à encode() mais sans la colonne 'readmitted'.
+    """
+    # Binaires
+    if "change" in df.columns:
+        df["change"]      = df["change"].map({"Ch": 1, "No": 0})
+    if "gender" in df.columns:
+        df["gender"]      = df["gender"].map({"Male": 1, "Female": 0})
+    if "diabetesMed" in df.columns:
+        df["diabetesMed"] = df["diabetesMed"].map({"Yes": 1, "No": 0})
+
+    # Age ordinal
+    if "age" in df.columns:
+        age_map = {f"[{10*i}-{10*(i+1)})": i+1 for i in range(10)}
+        df["age"] = df["age"].map(age_map)
+
+    # Médicaments
+    for col in [c for c in MED_COLS if c in df.columns]:
+        df[col] = df[col].map({"No": 0, "Steady": 1, "Up": 1, "Down": 1})
+
+    # Tests biologiques → flags
+    for src, tested, high, pos_vals in [
+        ("max_glu_serum", "glu_tested", "glu_high",  [">200", ">300", 1]),
+        ("A1Cresult",     "A1C_tested", "A1C_high",  [">7",   ">8",   1]),
+    ]:
+        if src in df.columns:
+            df[tested] = df[src].notna().astype(int)
+            df[high]   = df[src].isin(pos_vals).astype(int)
+            df.drop(columns=[src], inplace=True)
+
+    # IDs admission
+    if "admission_type_id" in df.columns:
+        df["admission_type_id"] = df["admission_type_id"].replace(
+            {2:1, 7:1, 6:5, 8:5})
+    if "discharge_disposition_id" in df.columns:
+        df["discharge_disposition_id"] = df["discharge_disposition_id"].replace(
+            {6:1,8:1,9:1,13:1, 3:2,4:2,5:2,14:2,22:2,23:2,24:2,
+             12:10,15:10,16:10,17:10, 25:18,26:18})
+    if "admission_source_id" in df.columns:
+        df["admission_source_id"] = df["admission_source_id"].replace(
+            {2:1,3:1, 5:4,6:4,10:4,22:4,25:4,
+             15:9,17:9,20:9,21:9, 13:11,14:11})
+
+    # Race OHE
+    if "race" in df.columns:
+        race_d = pd.get_dummies(df["race"], prefix="race", drop_first=True)
+        df = pd.concat([df.drop(columns=["race"]), race_d], axis=1)
+
     return df

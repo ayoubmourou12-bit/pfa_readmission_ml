@@ -1,8 +1,7 @@
 stages:
   preprocess:
     cmd: >
-      python -c "
-      from src.data_loader import build_dataset;
+      python -c "from src.data_loader import build_dataset;
       from src.preprocessing import split, save_splits;
       df = build_dataset();
       X_train, X_test, y_train, y_test = split(df);

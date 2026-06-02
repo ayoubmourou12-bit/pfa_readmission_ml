@@ -1,0 +1,15 @@
+{
+  "auc_roc": 0.6477,
+  "auc_pr": 0.1663,
+  "baseline_auc_pr": 0.0899,
+  "gain_vs_baseline": 0.0764,
+  "gain_ratio": 1.85,
+  "threshold": 0.469,
+  "recall": 0.6037,
+  "precision": 0.1327,
+  "f1": 0.2176,
+  "TP": 745,
+  "FP": 4870,
+  "FN": 489,
+  "TN": 7620
+}

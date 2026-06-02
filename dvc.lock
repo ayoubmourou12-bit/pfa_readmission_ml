@@ -1,0 +1,186 @@
+schema: '2.0'
+stages:
+  preprocess:
+    cmd: "python -c \"from src.data_loader import build_dataset; from src.preprocessing
+      import split, save_splits; df = build_dataset(); X_train, X_test, y_train, y_test
+      = split(df); save_splits(X_train, X_test, y_train, y_test) \"\n"
+    deps:
+    - path: data/raw/diabetic_data.csv
+      hash: md5
+      md5: 502f0cc004e4cf71536ec2e61596e42f
+      size: 19159383
+    - path: params.yaml
+      hash: md5
+      md5: d30df3afb45e33cb1a09e56d7782816b
+      size: 1401
+    - path: src/config.py
+      hash: md5
+      md5: ac5f5cbd17b51a57072630dcd8754dd7
+      size: 2401
+    - path: src/data_loader.py
+      hash: md5
+      md5: 47cb85c00b232d1a1de5d4c70174f782
+      size: 10866
+    - path: src/preprocessing.py
+      hash: md5
+      md5: 11643a06b3a4edb9ac3c8bec286296dc
+      size: 1715
+    params:
+      params.yaml:
+        data:
+          raw_path: data/raw/diabetic_data.csv
+          processed_dir: data/processed
+          test_size: 0.2
+          random_state: 42
+          dedup_col: patient_nbr
+          drop_cols:
+          - weight
+          - payer_code
+          - medical_specialty
+          - citoglipton
+          - examide
+          - encounter_id
+          - patient_nbr
+          drop_discharge_id: 11
+        preprocessing:
+          skewed_cols: []
+          winsorize_cols:
+          - number_outpatient
+          - number_inpatient
+          - number_emergency
+          - num_medications
+          winsorize_quantile: 0.99
+          med_cols:
+          - metformin
+          - repaglinide
+          - nateglinide
+          - chlorpropamide
+          - glimepiride
+          - glipizide
+          - glyburide
+          - pioglitazone
+          - rosiglitazone
+          - acarbose
+          - miglitol
+          - insulin
+          - glyburide-metformin
+          - tolazamide
+          - metformin-pioglitazone
+          - metformin-rosiglitazone
+          - glimepiride-pioglitazone
+          - glipizide-metformin
+          - troglitazone
+          - tolbutamide
+          - acetohexamide
+    outs:
+    - path: data/processed/X_test.pkl
+      hash: md5
+      md5: 9b3b83f0b9a9a5e18957e4a8dc753f29
+      size: 6261419
+    - path: data/processed/X_train.pkl
+      hash: md5
+      md5: 1c46c43efb51a4bc62b351d1d7dbbfc9
+      size: 25035411
+    - path: data/processed/y_test.pkl
+      hash: md5
+      md5: d36ff7857d7541cb53775f151ac921f9
+      size: 439973
+    - path: data/processed/y_train.pkl
+      hash: md5
+      md5: 3823e112a0f5c92e7760c0832a588311
+      size: 1757453
+  train:
+    cmd: python -m src.train
+    deps:
+    - path: data/processed/X_train.pkl
+      hash: md5
+      md5: 1c46c43efb51a4bc62b351d1d7dbbfc9
+      size: 25035411
+    - path: data/processed/y_train.pkl
+      hash: md5
+      md5: 3823e112a0f5c92e7760c0832a588311
+      size: 1757453
+    - path: params.yaml
+      hash: md5
+      md5: d30df3afb45e33cb1a09e56d7782816b
+      size: 1401
+    - path: src/config.py
+      hash: md5
+      md5: ac5f5cbd17b51a57072630dcd8754dd7
+      size: 2401
+    - path: src/train.py
+      hash: md5
+      md5: 7818eeccca04b934e965956fdf6d9c14
+      size: 3010
+    params:
+      params.yaml:
+        training:
+          model: lightgbm
+          n_estimators: 500
+          max_depth: 5
+          num_leaves: 31
+          learning_rate: 0.05
+          subsample: 0.8
+          colsample_bytree: 0.8
+          min_child_samples: 20
+          reg_alpha: 0.1
+          reg_lambda: 1.0
+          class_weight: balanced
+          random_state: 42
+          n_iter_search: 40
+    outs:
+    - path: models/best_model.pkl
+      hash: md5
+      md5: 8bb15ff87c1f96ec65e2bde72c2b3393
+      size: 2445460
+    - path: models/feature_names.pkl
+      hash: md5
+      md5: 380c21c0570d3561331f5f7bde3bb2f8
+      size: 1147
+  evaluate:
+    cmd: python -m src.evaluate
+    deps:
+    - path: data/processed/X_test.pkl
+      hash: md5
+      md5: 9b3b83f0b9a9a5e18957e4a8dc753f29
+      size: 6261419
+    - path: data/processed/y_test.pkl
+      hash: md5
+      md5: d36ff7857d7541cb53775f151ac921f9
+      size: 439973
+    - path: models/best_model.pkl
+      hash: md5
+      md5: 8bb15ff87c1f96ec65e2bde72c2b3393
+      size: 2445460
+    - path: params.yaml
+      hash: md5
+      md5: d30df3afb45e33cb1a09e56d7782816b
+      size: 1401
+    - path: src/config.py
+      hash: md5
+      md5: ac5f5cbd17b51a57072630dcd8754dd7
+      size: 2401
+    - path: src/evaluate.py
+      hash: md5
+      md5: be282ef33183abf0f4066bbb08c771f2
+      size: 4052
+    params:
+      params.yaml:
+        evaluation:
+          threshold_recall_min: 0.6
+          metrics_path: reports/metrics.json
+          confusion_matrix_path: reports/confusion_matrix.png
+          main_metric: average_precision
+    outs:
+    - path: models/threshold.pkl
+      hash: md5
+      md5: f8ad02b121d09ac31c7caf436afaf28c
+      size: 21
+    - path: reports/confusion_matrix.png
+      hash: md5
+      md5: ff5e4f3dbe502c8f58c961fbad1ee8c8
+      size: 33222
+    - path: reports/metrics.json
+      hash: md5
+      md5: fabd580500b50888a82cd0bf3be88146
+      size: 273
