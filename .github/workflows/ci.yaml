@@ -60,4 +60,4 @@ jobs:
         run: |
           flake8 src/ api/ --max-line-length=100 \
             --exclude=__pycache__ \
-            --ignore=E501,W503
+            --ignore=E241,E221,E231,W292,F401
