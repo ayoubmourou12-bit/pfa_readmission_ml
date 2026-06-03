@@ -18,3 +18,5 @@ scipy==1.13.0
 pyyaml==6.0.1
 pytest==8.2.0
 httpx==0.27.0
+black==24.4.2
+isort==5.13.2
