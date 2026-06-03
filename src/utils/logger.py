@@ -2,7 +2,7 @@ import logging
 import sys
 from pathlib import Path
 
-LOG_DIR  = Path(__file__).resolve().parent.parent.parent / "reports"
+LOG_DIR = Path(__file__).resolve().parent.parent.parent / "reports"
 LOG_FILE = LOG_DIR / "app.log"
 
 

@@ -1,7 +1,9 @@
-from fastapi import FastAPI
 from contextlib import asynccontextmanager
-from src.predict import load_artifacts
+
+from fastapi import FastAPI
+
 from api.routes import router, set_artifacts
+from src.predict import load_artifacts
 from src.utils.logger import get_logger
 
 logger = get_logger("api.app")
