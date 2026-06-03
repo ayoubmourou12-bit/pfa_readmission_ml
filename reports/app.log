@@ -240,3 +240,5 @@
 [2026-06-03 14:38:18] INFO     src.predict — Artefacts chargés — 71 features
 [2026-06-03 14:38:18] INFO     api.app — ✅ Modèle chargé — API prête
 [2026-06-03 14:38:30] INFO     api.app — Arrêt de l'API
+[2026-06-03 14:39:15] INFO     src.predict — Prédiction : Réadmission probable (<30j) | proba=0.569
+[2026-06-03 14:39:15] INFO     api.routes — POST /predict | pred=1 proba=0.569 risk=Élevé | 0.183s

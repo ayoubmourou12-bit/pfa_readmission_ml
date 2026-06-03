@@ -56,6 +56,9 @@ jobs:
           python-version: "3.10"
       - name: Installation flake8
         run: pip install flake8
+      - name: Install formatting tools
+        run: |
+          pip install black isort
       - name: Format check
         run: black --check src api
       - name: Vérification style (flake8)
