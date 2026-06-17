@@ -1,0 +1,32 @@
+version: "3.9"
+
+services:
+  api:
+    image: ${DOCKERHUB_USERNAME}/readmission-api:${IMAGE_TAG:-latest}
+    container_name: readmission_api
+    ports:
+      - "${API_PORT:-8000}:8000"
+    volumes:
+      - ./models:/app/models:ro
+      - ./reports:/app/reports:ro
+    environment:
+      - PYTHONPATH=/app
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+
+  frontend:
+    image: ${DOCKERHUB_USERNAME}/readmission-frontend:${IMAGE_TAG:-latest}
+    container_name: readmission_frontend
+    ports:
+      - "${FRONTEND_PORT:-8501}:8501"
+    environment:
+      - PYTHONPATH=/app
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: unless-stopped
