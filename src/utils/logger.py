@@ -25,8 +25,8 @@ def get_logger(name: str) -> logging.Logger:
     logger.addHandler(ch)
 
     # Fichier
-    fh = logging.FileHandler(LOG_FILE, encoding="utf-8")
-    fh.setFormatter(fmt)
-    logger.addHandler(fh)
+    #fh = logging.FileHandler(LOG_FILE, encoding="utf-8")
+    #fh.setFormatter(fmt)
+    #logger.addHandler(fh)
 
     return logger
