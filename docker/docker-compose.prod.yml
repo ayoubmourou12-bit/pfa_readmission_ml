@@ -6,9 +6,6 @@ services:
     container_name: readmission_api
     ports:
       - "${API_PORT:-8000}:8000"
-    volumes:
-      - ./models:/app/models:ro
-      - ./reports:/app/reports:ro
     environment:
       - PYTHONPATH=/app
     restart: unless-stopped
