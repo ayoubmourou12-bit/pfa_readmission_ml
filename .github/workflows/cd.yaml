@@ -51,6 +51,14 @@ jobs:
           SHORT_SHA=$(echo ${{ github.sha }} | cut -c1-7)
           echo "version=${SHORT_SHA}" >> $GITHUB_OUTPUT
           echo "Tag image : ${SHORT_SHA}"
+                - name: Setup DVC
+        uses: iterative/setup-dvc@v1
+
+      - name: Pull models from DVC
+        run: dvc pull
+        env:
+          GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }} # Si vous utilisez Google Drive
+
 
       - name: Build et push image API
         uses: docker/build-push-action@v5
