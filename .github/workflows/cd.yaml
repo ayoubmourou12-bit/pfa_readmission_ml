@@ -51,7 +51,7 @@ jobs:
           SHORT_SHA=$(echo ${{ github.sha }} | cut -c1-7)
           echo "version=${SHORT_SHA}" >> $GITHUB_OUTPUT
           echo "Tag image : ${SHORT_SHA}"
-                - name: Setup DVC
+      - name: Setup DVC
         uses: iterative/setup-dvc@v1
 
       - name: Pull models from DVC
