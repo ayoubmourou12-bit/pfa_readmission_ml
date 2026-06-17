@@ -111,9 +111,9 @@ jobs:
           docker pull ${{ secrets.DOCKERHUB_USERNAME }}/readmission-api:latest
           docker pull ${{ secrets.DOCKERHUB_USERNAME }}/readmission-frontend:latest
 
-      - name: Lancer les conteneurs (docker-compose prod)
+      - name: Lancer les conteneurs (docker compose prod)
         run: |
-          docker-compose \
+          docker compose \
             -f docker/docker-compose.prod.yml \
             --env-file .env \
             up -d --wait
@@ -195,7 +195,7 @@ jobs:
       - name: Arrêter les conteneurs (nettoyage runner)
         if: always()
         run: |
-          docker-compose \
+          docker compose \
             -f docker/docker-compose.prod.yml \
             --env-file .env \
             down
