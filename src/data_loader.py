@@ -3,8 +3,15 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from src.config import (DEDUP_COL, DROP_COLS, DROP_DISCH_ID, MED_COLS,
-                        RAW_DATA_PATH, WINSORIZE_COLS, WINSORIZE_QUANTILE)
+from src.config import (
+    DEDUP_COL,
+    DROP_COLS,
+    DROP_DISCH_ID,
+    MED_COLS,
+    RAW_DATA_PATH,
+    WINSORIZE_COLS,
+    WINSORIZE_QUANTILE,
+)
 
 
 def load_raw(path: Path = RAW_DATA_PATH) -> pd.DataFrame:

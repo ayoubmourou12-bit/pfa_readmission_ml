@@ -7,11 +7,17 @@ import mlflow
 import mlflow.sklearn
 import numpy as np
 from sklearn.metrics import average_precision_score
-from sklearn.model_selection import (RandomizedSearchCV, StratifiedKFold,
-                                     cross_val_score)
+from sklearn.model_selection import RandomizedSearchCV, StratifiedKFold, cross_val_score
 
-from src.config import (EXPERIMENT_NAME, MAIN_METRIC, MLFLOW_URI, MODELS_DIR,
-                        N_ITER, RANDOM_STATE, TRAINING)
+from src.config import (
+    EXPERIMENT_NAME,
+    MAIN_METRIC,
+    MLFLOW_URI,
+    MODELS_DIR,
+    N_ITER,
+    RANDOM_STATE,
+    TRAINING,
+)
 from src.preprocessing import load_splits
 
 
