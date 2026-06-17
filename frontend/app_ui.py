@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import matplotlib
 matplotlib.use("Agg")
 
-API_URL = "http://localhost:8000"
+API_URL = "http://api:8000"
 
 # ── Config page ───────────────────────────────────────────────────────────────
 st.set_page_config(
